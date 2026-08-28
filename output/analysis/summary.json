@@ -1,0 +1,82 @@
+[
+  {
+    "company": "Ahold Delhaize",
+    "report": "ahold-delhaize-annual-report-2025-interactive.pdf",
+    "score": 46.3,
+    "grade": "F",
+    "accepted_values": 10,
+    "ambiguous_groups_excluded": 9,
+    "source_url": "https://www.aholddelhaize.com/investors/esg/",
+    "output": "output/analysis/ahold-delhaize-annual-report-2025-interactive.json"
+  },
+  {
+    "company": "DHL Group",
+    "report": "DHL-Group-Sustainability-Presentation-2025.txt",
+    "score": 37.0,
+    "grade": "F",
+    "accepted_values": 4,
+    "ambiguous_groups_excluded": 2,
+    "source_url": "https://group.dhl.com/",
+    "output": "output/analysis/dhl-group-sustainability-presentation-2025.json"
+  },
+  {
+    "company": "Flora Food Group",
+    "report": "FloraFoodGroupAnnualReport2025:26  low res.pdf",
+    "score": 38.9,
+    "grade": "F",
+    "accepted_values": 1,
+    "ambiguous_groups_excluded": 2,
+    "source_url": "https://www.florafoodgroup.com/esg-centre",
+    "output": "output/analysis/florafoodgroupannualreport2025-26-low-res.json"
+  },
+  {
+    "company": "H&M Group",
+    "report": "HM-Group-Annual-and-sustainability-report-2025.txt",
+    "score": 46.1,
+    "grade": "F",
+    "accepted_values": 26,
+    "ambiguous_groups_excluded": 4,
+    "source_url": "https://hmgroup.com/",
+    "output": "output/analysis/hm-group-annual-and-sustainability-report-2025.json"
+  },
+  {
+    "company": "Kellanova",
+    "report": "Kellanova_TCFD_2025.pdf",
+    "score": 18.4,
+    "grade": "F",
+    "accepted_values": 4,
+    "ambiguous_groups_excluded": 2,
+    "source_url": "https://betterdayspromise.kellanova.com/tcfd",
+    "output": "output/analysis/kellanova-tcfd-2025.json"
+  },
+  {
+    "company": "Lufthansa Group",
+    "report": "LHG-Factsheet-Sustainability-2025.pdf",
+    "score": 33.1,
+    "grade": "F",
+    "accepted_values": 13,
+    "ambiguous_groups_excluded": 4,
+    "source_url": "https://www.lufthansagroup.com/en/responsibility.html",
+    "output": "output/analysis/lhg-factsheet-sustainability-2025.json"
+  },
+  {
+    "company": "Nomad Foods",
+    "report": "NomadFoodsSR25.pdf",
+    "score": 25.4,
+    "grade": "F",
+    "accepted_values": 4,
+    "ambiguous_groups_excluded": 2,
+    "source_url": "https://www.nomadfoods.com/appetite-for-a-better-world/",
+    "output": "output/analysis/nomadfoodssr25.json"
+  },
+  {
+    "company": "Vestas Wind Systems A/S",
+    "report": "Vestas Annual Report 2025.pdf",
+    "score": 51.8,
+    "grade": "F",
+    "accepted_values": 37,
+    "ambiguous_groups_excluded": 7,
+    "source_url": "https://www.vestas.com/en/investor/reporting/2025",
+    "output": "output/analysis/vestas-annual-report-2025.json"
+  }
+]
