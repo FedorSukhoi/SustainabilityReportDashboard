@@ -167,12 +167,14 @@ category score = 100 × sum(weighted metric scores) / sum(metric weights)
 Every configured certification or standard whose name occurs in the report adds one overall point, capped at 10. Detection confirms only that the term occurs; it does not validate certificate ownership, scope, issue date, or expiry.
 
 ```text
-overall score = mean(Environmental, Social, Governance) + certification bonus
+overall score = 0.70 × Environmental + 0.20 × Social + 0.10 × Governance + certification bonus
 ```
 
-The result is capped at 100 and rounded to one decimal. Letter grades use `A ≥ 90`, `B ≥ 80`, `C ≥ 70`, `D ≥ 60`, and `F < 60`.
+The result is rounded to one decimal and capped at 100, then graded using exclusive thresholds: `A > 80`, `B > 70`, `C > 55`, `D > 25`, and `F ≤ 25`. The dashboard uses the same boundaries, displaying F as **Starter**. Pillar cards apply these bands to their individual scores; the overall score includes the certification bonus.
 
-The dashboard uses a separate descriptive scale: `Strong ≥ 65`, `Good ≥ 50`, `Developing ≥ 35`, and `Limited < 35`.
+Methodology version: `index-2026-09-24`. Utilities and questionnaires are excluded; the report-based evidence model supplies the entire index score. Metric scoring, metric weights, extraction, and the certification mention bonus are retained. Environmental's 70% is its share of the weighted pillar subtotal, before the additive bonus. The Klimado 0.35 certificate boost and 80/20 evidence/materiality blend are deferred until certificate E/S/G values and industry-materiality mappings are available. No missing materiality values are inferred or set to zero.
+
+See [revised handoff pack](docs/esg-methodology-handoff-pack.md) and [revised ClickUp reconciliation](docs/esg-methodology-clickup-source.md). These describe the agreed index adaptation, not numerical equivalence with Klimado production. Shared aggregation and grading live in `scoring.py`.
 
 ### 10. JSON generation and report archiving
 
@@ -183,6 +185,7 @@ The company JSON contains:
 | Field | Meaning |
 | --- | --- |
 | `report`, `company`, `report_stats` | Source identity and extraction statistics. |
+| `methodology_version` | Version of the index scoring rules. |
 | `overall_score`, `overall_grade` | Final numeric result and letter grade. |
 | `certification_bonus` | Number of detected configured standards, capped at 10. |
 | `values_total` | Number of accepted numeric rows. |
@@ -212,7 +215,7 @@ JSON-to-dashboard mappings are:
 | Dashboard component | Input |
 | --- | --- |
 | Hero score and sidebar score | `overall_score` |
-| ESG status pill | Descriptive scale applied to `overall_score` |
+| ESG status pill | Shared letter-grade scale applied to `overall_score`; F displayed as Starter |
 | ESG pillar cards | `category_scores` |
 | Key sustainability areas | Six non-zero metrics ranked by weighted score, then total score |
 | Evidence cards | First eight `primary_values`, joined back by metric, value, unit, year, and variant for page and resolution metadata |
@@ -265,7 +268,7 @@ The current covered source is [`HM-Group-Annual-and-sustainability-report-2025.t
 | Ambiguous groups excluded | 4 | Three Water Withdrawal periods and one undated Renewable Energy group. |
 | Certifications | 7 | ISO 45001, CDP, SBTi, RE100, FSC, PEFC, and Sedex. |
 | Category scores | E 62.9 · S 21.1 · G 33.2 | Weighted metric aggregation. |
-| Overall | 46.1 / 100 · F | Category mean plus the seven-point certification bonus. |
+| Overall | 58.6 / 100 · C | 70/20/10 weighted categories plus the seven-point certification bonus. |
 | Source link | `https://hmgroup.com/` | Official-company-site fallback because the TXT export has no stronger embedded report URL. |
 
 ### How the page 41 emissions table becomes dated JSON
@@ -350,7 +353,7 @@ The four abstentions produce `ambiguous_groups_excluded: 4`; `target_only` is se
 | Governance | Data Privacy | 3 | 0 | 3 | 8 | 2.4 |
 | Governance | Ethics | 3 | 0 | 3 | 7 | 2.1 |
 
-The weighted Environmental rows sum to 56.6 across 90 weight points, producing 62.9. Social remains 21.1 and Governance 33.2. Their mean is 39.0667; adding the seven-point certification bonus gives the final 46.1 score. The dashboard therefore shows `Developing`, while the letter-grade scale gives `F`.
+The weighted Environmental rows sum to 56.6 across 90 weight points, producing 62.9. Social remains 21.1 and Governance 33.2. Their weighted subtotal is `62.9 × 0.7 + 21.1 × 0.2 + 33.2 × 0.1 = 51.57`; adding the seven-point certification bonus and rounding gives 58.6. Both the dashboard and JSON use grade `C`.
 
 ## Interpretation limits
 

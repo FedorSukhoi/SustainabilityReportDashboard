@@ -166,14 +166,12 @@ def icon(name, size=18):
 
 
 def score_label(score):
-    score = float(score or 0)
-    if score >= 65:
-        return "Strong", "green"
-    if score >= 50:
-        return "Good", "blue"
-    if score >= 35:
-        return "Developing", "amber"
-    return "Limited", "slate"
+    from scoring import grade_from_score
+
+    grade = grade_from_score(float(score or 0))
+    return ("Starter" if grade == "F" else grade), {
+        "A": "green", "B": "blue", "C": "amber", "D": "amber", "F": "slate"
+    }[grade]
 
 
 def format_number(value, unit):
@@ -354,7 +352,7 @@ def render_dashboard(data, output_path: Path):
   <div class="shell">
     <main class="main">
       <section class="card"><div class="section-title"><span class="accent"></span><h2>About {esc(company)}</h2></div><div class="about-copy">{about}</div></section>
-      <section class="card"><div class="section-title"><span class="accent"></span><h2>Sustainability overview</h2></div><div class="methodology">{icon('shield',20)}<div><strong>Methodology note.</strong> Ratings follow the Impakter Index rule-based methodology. Disclosure coverage and performance signals are scored separately; ambiguous numeric candidates are excluded rather than estimated.</div></div><div class="pillars">{''.join(pillar_cards)}</div></section>
+      <section class="card"><div class="section-title"><span class="accent"></span><h2>Sustainability overview</h2></div><div class="methodology">{icon('shield',20)}<div><strong>Methodology note.</strong> The index weights Environmental 70%, Social 20%, and Governance 10%, then adds one point per detected certification or standard (maximum 10), capped at 100. Grades: A &gt;80, B &gt;70, C &gt;55, D &gt;25; otherwise Starter (F). Scores are rounded to one decimal before grading. Report disclosure and performance signals remain the scoring inputs; certification mentions are not validated certificates. Utilities and questionnaires are excluded.</div></div><div class="pillars">{''.join(pillar_cards)}</div></section>
       <section class="card"><div class="section-title"><span class="accent"></span><h2>Key sustainability areas</h2></div><div class="areas">{''.join(areas)}</div></section>
       <section class="card"><div class="section-title"><span class="accent"></span><h2>Certificates & standards</h2></div><div class="certificate-list">{''.join(certificates)}</div></section>
       <section class="card"><div class="section-title"><span class="accent"></span><h2>Sustainability evidence</h2></div><div class="evidence-grid">{''.join(evidence_cards)}</div></section>

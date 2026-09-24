@@ -63,6 +63,7 @@ def analyze(notebook_path: Path, report_path: Path):
             key: namespace["REPORT"][key]
             for key in ("word_count", "sentence_count", "paragraph_count")
         },
+        "methodology_version": results["methodology_version"],
         "overall_score": results["overall_score"],
         "overall_grade": results["overall_grade"],
         "certification_bonus": results["certification_bonus"],
